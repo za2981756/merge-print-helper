@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>擷取結果</title>
+    <style>
+        table, th, td { border: 1px solid black; border-collapse: collapse; padding: 6px; }
+    </style>
+</head>
+<body>
+    <h1>擷取結果：</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="pdfs" multiple required>
+        <button type="submit">上傳並擷取</button>
+    </form>
+    <br>
+    {% if results %}
+    <table>
+        <tr><th>郵遞區號</th><th>建物門牌</th><th>姓名</th><th>地址</th></tr>
+        {% for row in results %}
+        <tr>
+            <td>{{ row['郵遞區號'] }}</td>
+            <td>{{ row['建物門牌'] }}</td>
+            <td>{{ row['姓名'] }}</td>
+            <td>{{ row['地址'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br><a href="/download">下載批次擷取結果 Excel</a>
+    {% endif %}
+</body>
+</html>
